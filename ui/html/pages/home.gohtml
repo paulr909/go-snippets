@@ -1,24 +1,33 @@
 {{define "title"}}Home{{end}}
 
 {{define "main"}}
-    <h2>Latest Snippets</h2>
-    {{if .Snippets}}
-        <table>
-            <tr>
-                <th>Title</th>
-                <th>Created</th>
-                <th>ID</th>
-            </tr>
-            {{range .Snippets}}
-                <tr>
-                    <!-- Use the new clean URL style-->
-                    <td><a href='/snippet/view/{{.ID}}'>{{.Title}}</a></td>
-                    <td>{{humanDate .Created}}</td>
-                    <td>#{{.ID}}</td>
-                </tr>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="banner">
+                <h1>Latest Snippets</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 offset-md-3 mb-5">
+            {{if .Snippets}}
+                <table class="table">
+                    <tr>
+                        <th>Title:</th>
+                        <th>Created:</th>
+                        <th>ID:</th>
+                    </tr>
+                    {{range .Snippets}}
+                        <tr>
+                            <td><a href='/snippet/view/{{.ID}}'>{{.Title}}</a></td>
+                            <td>{{humanDate .Created}}</td>
+                            <td>#{{.ID}}</td>
+                        </tr>
+                    {{end}}
+                </table>
+            {{else}}
+                <p>There's nothing to see here... yet!</p>
             {{end}}
-        </table>
-    {{else}}
-        <p>There's nothing to see here... yet!</p>
-    {{end}}
+        </div>
+    </div>
 {{end}}

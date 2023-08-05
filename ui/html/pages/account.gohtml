@@ -1,26 +1,35 @@
 {{define "title"}}Your Account{{end}}
 
 {{define "main"}}
-    <h2>Your Account</h2>
-    {{with .User}}
-        <table>
-            <tr>
-                <th>Name</th>
-                <td>{{.Name}}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{.Email}}</td>
-            </tr>
-            <tr>
-                <th>Joined</th>
-                <td>{{humanDate .Created}}</td>
-            </tr>
-            <tr>
-                <!-- Add a link to the change password form -->
-                <th>Password</th>
-                <td><a href="/account/password/update">Change password</a></td>
-            </tr>
-        </table>
-    {{end }}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="banner">
+                <h1>Your Account</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            {{with .User}}
+                <table class="table">
+                    <tr>
+                        <th>Name:</th>
+                        <td>{{.Name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                        <td>{{.Email}}</td>
+                    </tr>
+                    <tr>
+                        <th>Joined:</th>
+                        <td>{{humanDate .Created}}</td>
+                    </tr>
+                    <tr>
+                        <th>Password:</th>
+                        <td><a href="/account/password/update">Change password</a></td>
+                    </tr>
+                </table>
+            {{end }}
+        </div>
+    </div>
 {{end}}

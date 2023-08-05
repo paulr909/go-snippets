@@ -1,34 +1,50 @@
 {{define "title"}}Create a New Snippet{{end}}
 
 {{define "main"}}
-    <form action='/snippet/create' method='POST'>
-        <!-- Include the CSRF token -->
-        <input type='hidden' name='csrf_token' value='{{.CSRFToken}}'>
-        <div>
-            <label>Title:</label>
-            {{with .Form.FieldErrors.title}}
-                <label class='error'>{{.}}</label>
-            {{end}}
-            <input type='text' name='title' value='{{.Form.Title}}'>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="banner">
+                <h1>Create Snippet</h1>
+            </div>
         </div>
-        <div>
-            <label>Content:</label>
-            {{with .Form.FieldErrors.content}}
-                <label class='error'>{{.}}</label>
-            {{end}}
-            <textarea name='content'>{{.Form.Content}}</textarea>
+    </div>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form action='/snippet/create' method='POST'>
+                <!-- Include the CSRF token -->
+                <input type='hidden' name='csrf_token' value='{{.CSRFToken}}'>
+                <div class="mb-3">
+                    <label class="form-label" for="formControlInput1">Title:</label>
+                    {{with .Form.FieldErrors.title}}
+                        <label class='form-label text-danger' for="formControlInput1">{{.}}</label>
+                    {{end}}
+                    <input type="text" name='title' value='{{.Form.Title}}' class="form-control" id="formControlInput1"
+                           placeholder="Title">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="formControlInput2">Content:</label>
+                    {{with .Form.FieldErrors.content}}
+                        <label class='form-label text-danger' for="formControlInput2">{{.}}</label>
+                    {{end}}
+                    <textarea name='content' class="form-control" id="formControlInput2"
+                              placeholder="Content">{{.Form.Content}}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="formControlInput3">Delete in:</label>
+                    {{with .Form.FieldErrors.expires}}
+                        <label class='form-label text-danger' for="formControlInput3">{{.}}</label>
+                    {{end}}
+                    <input type='radio' name='expires' value='365' id="formControlInput3"
+                           {{if (eq .Form.Expires 365)}}checked{{end}}> One Year
+                    <input type='radio' name='expires' value='7' id="formControlInput3"
+                           {{if (eq .Form.Expires 7)}}checked{{end}}> One Week
+                    <input type='radio' name='expires' value='1' id="formControlInput3"
+                           {{if (eq .Form.Expires 1)}}checked{{end}}> One Day
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Publish snippet</button>
+                </div>
+            </form>
         </div>
-        <div>
-            <label>Delete in:</label>
-            {{with .Form.FieldErrors.expires}}
-                <label class='error'>{{.}}</label>
-            {{end}}
-            <input type='radio' name='expires' value='365' {{if (eq .Form.Expires 365)}}checked{{end}}> One Year
-            <input type='radio' name='expires' value='7' {{if (eq .Form.Expires 7)}}checked{{end}}> One Week
-            <input type='radio' name='expires' value='1' {{if (eq .Form.Expires 1)}}checked{{end}}> One Day
-        </div>
-        <div>
-            <input type='submit' value='Publish snippet'>
-        </div>
-    </form>
+    </div>
 {{end}}

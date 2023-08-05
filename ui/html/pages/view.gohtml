@@ -1,18 +1,24 @@
 {{define "title"}}Snippet #{{.Snippet.ID}}{{end}}
 
 {{define "main"}}
-    {{with .Snippet}}
-        <div class='snippet'>
-            <div class='metadata'>
-                <strong>{{.Title}}</strong>
-                <span>#{{.ID}}</span>
-            </div>
-            <pre><code>{{.Content}}</code></pre>
-            <div class='metadata'>
-                <!-- Use the new template function here -->
-                <time>Created: {{humanDate .Created}}</time>
-                <time>Expires: {{humanDate .Expires}}</time>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="banner">
+                <h1>Snippet</h1>
             </div>
         </div>
-    {{end}}
+    </div>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            {{with .Snippet}}
+                <h2 class="mb-4">{{.Title}}</h2>
+                <pre><code>{{.Content}}</code></pre>
+                <p>#{{.ID}} -
+                    <time>Created: {{humanDate .Created}}</time>
+                    -
+                    <time>Expires: {{humanDate .Expires}}</time>
+                </p>
+            {{end}}
+        </div>
+    </div>
 {{end}}
