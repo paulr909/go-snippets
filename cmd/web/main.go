@@ -21,8 +21,8 @@ type application struct {
 	debug          bool
 	errorLog       *log.Logger
 	infoLog        *log.Logger
-	snippets       models.SnippetModelInterface // Use our new interface type.
-	users          models.UserModelInterface    // Use our new interface type.
+	snippets       models.SnippetModelInterface
+	users          models.UserModelInterface
 	templateCache  map[string]*template.Template
 	formDecoder    *form.Decoder
 	sessionManager *scs.SessionManager

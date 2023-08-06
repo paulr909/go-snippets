@@ -11,8 +11,7 @@ import (
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
-	// Because httprouter matches the "/" path exactly, we can now remove the
-	// manual check of r.URL.Path != "/" from this handler.
+	// http-router matches the "/" path exactly
 
 	snippets, err := app.snippets.Latest()
 	if err != nil {
@@ -119,7 +118,6 @@ type userSignupForm struct {
 	validator.Validator `form:"-"`
 }
 
-// Update the handler so it displays the signup page.
 func (app *application) userSignup(w http.ResponseWriter, r *http.Request) {
 	data := app.newTemplateData(r)
 	data.Form = userSignupForm{}
@@ -179,7 +177,6 @@ type userLoginForm struct {
 	validator.Validator `form:"-"`
 }
 
-// Update the handler so it displays the login page.
 func (app *application) userLogin(w http.ResponseWriter, r *http.Request) {
 	data := app.newTemplateData(r)
 	data.Form = userLoginForm{}
