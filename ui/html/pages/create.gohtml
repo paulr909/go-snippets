@@ -26,7 +26,7 @@
                     {{with .Form.FieldErrors.content}}
                         <label class='form-label text-danger' for="formControlInput2">{{.}}</label>
                     {{end}}
-                    <textarea name='content' class="form-control" id="formControlInput2"
+                    <textarea name='content' rows="9" class="form-control" id="formControlInput2"
                               placeholder="Content">{{.Form.Content}}</textarea>
                 </div>
                 <div class="mb-3">
@@ -42,7 +42,7 @@
                            {{if (eq .Form.Expires 1)}}checked{{end}}> One Day
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">Publish snippet</button>
+                    <button type="submit" class="btn btn-outline-primary">Publish snippet</button>
                 </div>
             </form>
         </div>
