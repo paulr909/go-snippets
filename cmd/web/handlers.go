@@ -277,6 +277,11 @@ func (app *application) tech(w http.ResponseWriter, r *http.Request) {
 	app.render(w, http.StatusOK, "tech.gohtml", data)
 }
 
+func (app *application) contact(w http.ResponseWriter, r *http.Request) {
+	data := app.newTemplateData(r)
+	app.render(w, http.StatusOK, "contact.gohtml", data)
+}
+
 func (app *application) accountView(w http.ResponseWriter, r *http.Request) {
 	userID := app.sessionManager.GetInt(r.Context(), "authenticatedUserID")
 
