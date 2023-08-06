@@ -8,6 +8,7 @@ import (
 	"github.com/alexedwards/scs/v2"
 	"github.com/go-playground/form/v4"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/joho/godotenv"
 	"html/template"
 	"log"
 	"net/http"
@@ -16,7 +17,15 @@ import (
 	"time"
 )
 
-// Add a formDecoder field to hold a pointer to a form.Decoder instance.
+//func init() {
+//	err := godotenv.Load(".env")
+//
+//	if err != nil {
+//		log.Fatal("Error loading .env file")
+//	}
+//}
+
+// Add a formDecoder field to hold a pointer to form.Decoder instance.
 type application struct {
 	debug          bool
 	errorLog       *log.Logger
@@ -36,6 +45,12 @@ func main() {
 
 	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
 	errorLog := log.New(os.Stderr, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
+
+	err := godotenv.Load(".env")
+
+	if err != nil {
+		errorLog.Fatal("Error loading .env file", err)
+	}
 
 	db, err := openDB(*dsn)
 	if err != nil {
@@ -91,6 +106,7 @@ func main() {
 		WriteTimeout: 10 * time.Second,
 	}
 
+	infoLog.Printf(".env file API_KEY=%s", os.Getenv("API_KEY"))
 	infoLog.Printf("Starting server on %s", *addr)
 	err = srv.ListenAndServeTLS("./tls/cert.pem", "./tls/key.pem")
 	errorLog.Fatal(err)
