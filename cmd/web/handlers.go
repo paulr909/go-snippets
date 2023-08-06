@@ -254,7 +254,7 @@ func (app *application) userLogoutPost(w http.ResponseWriter, r *http.Request) {
 
 	// Add a flash message to the session to confirm to the user that they've been
 	// logged out.
-	app.sessionManager.Put(r.Context(), "flash", "You've been logged out successfully!")
+	app.sessionManager.Put(r.Context(), "flash", "You have logged out successfully!")
 
 	// Redirect the user to the application home page.
 	http.Redirect(w, r, "/", http.StatusSeeOther)
