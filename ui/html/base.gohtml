@@ -17,12 +17,6 @@
     {{template "nav" .}}
     <main class="content">
         <div class="container">
-            <!-- Display the flash message if one exists -->
-            {{with .Flash}}
-                <div class="alert alert-success mt-3" role="alert">
-                    {{.}}
-                </div>
-            {{end}}
             {{template "main" .}}
         </div>
     </main>

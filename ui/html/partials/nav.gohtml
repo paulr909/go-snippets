@@ -39,6 +39,12 @@
                     {{end}}
                 </ul>
             </div>
+            <!-- Display the flash message if one exists -->
+            {{with .Flash}}
+                <div class="alert alert-success" role="alert">
+                    {{.}}
+                </div>
+            {{end}}
         </div>
     </nav>
 {{end}}
