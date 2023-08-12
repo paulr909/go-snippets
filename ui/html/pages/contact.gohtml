@@ -9,11 +9,49 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6 offset-md-3">
+        <div class="col-md-4 offset-md-4">
             <h2>How can I help you</h2>
             <p>I have an array of skills and experience to ensure your product is built with best
                 practices, high security, and excellent performance.
             </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 offset-md-4 mt-3">
+            <form action="/contact/email" method="POST" novalidate>
+                <!-- Include the CSRF token -->
+                <input type='hidden' name='csrf_token' value='{{.CSRFToken}}'>
+                {{range .Form.NonFieldErrors}}
+                    <div class='text-danger'>{{.}}</div>
+                {{end}}
+                <div class="mb-3">
+                    <label class="form-label" for="formControlInput1">Name:</label>
+                    {{with .Form.FieldErrors.name}}
+                        <label class='form-label text-danger' for="formControlInput1">{{.}}</label>
+                    {{end}}
+                    <input type="text" name='name' value='{{.Form.Name}}' class="form-control" id="formControlInput1"
+                           placeholder="Your full name">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="formControlInput2">Email:</label>
+                    {{with .Form.FieldErrors.email}}
+                        <label class='form-label text-danger' for="formControlInput2">{{.}}</label>
+                    {{end}}
+                    <input type="email" name='email' value='{{.Form.Email}}' class="form-control" id="formControlInput2"
+                           placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="formControlInput3">Message:</label>
+                    {{with .Form.FieldErrors.message}}
+                        <label class='form-label text-danger' for="formControlInput3">{{.}}</label>
+                    {{end}}
+                    <textarea name='message' rows="3" class="form-control" id="formControlInput3"
+                              placeholder="Leave a message here">{{.Form.Message}}</textarea>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-outline-primary">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 {{end}}

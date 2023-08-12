@@ -3,8 +3,10 @@ package main
 import (
 	"errors"
 	"fmt"
+	"github.com/go-mail/mail"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
+	"os"
 	"paulr909.github.com/internal/models"
 	"paulr909.github.com/internal/validator"
 	"strconv"
@@ -274,9 +276,54 @@ func (app *application) tech(w http.ResponseWriter, r *http.Request) {
 	app.render(w, http.StatusOK, "tech.gohtml", data)
 }
 
+type contactForm struct {
+	Name                string `form:"name"`
+	Email               string `form:"email"`
+	Message             string `form:"message"`
+	validator.Validator `form:"-"`
+}
+
 func (app *application) contact(w http.ResponseWriter, r *http.Request) {
 	data := app.newTemplateData(r)
+	data.Form = contactForm{}
 	app.render(w, http.StatusOK, "contact.gohtml", data)
+}
+
+func (app *application) contactPost(w http.ResponseWriter, r *http.Request) {
+	var form contactForm
+
+	err := app.decodePostForm(r, &form)
+	if err != nil {
+		app.clientError(w, http.StatusBadRequest)
+		return
+	}
+
+	form.CheckField(validator.NotBlank(form.Name), "name", "This field cannot be blank")
+	form.CheckField(validator.NotBlank(form.Email), "email", "This field cannot be blank")
+	form.CheckField(validator.Matches(form.Email, validator.EmailRX), "email", "This field must be a valid email address")
+	form.CheckField(validator.NotBlank(form.Message), "message", "This field cannot be blank")
+
+	if !form.Valid() {
+		data := app.newTemplateData(r)
+		data.Form = form
+
+		app.render(w, http.StatusUnprocessableEntity, "contact.gohtml", data)
+		return
+	}
+
+	m := mail.NewMessage()
+	m.SetHeader("From", "team@paul-codes.com")
+	m.SetHeader("To", os.Getenv("PERSONAL_EMAIL"))
+	m.SetHeader("Subject", "Contact Form")
+	m.SetBody("text/html", fmt.Sprintf("Hi Paul,<br><br>New contact details below.<br><br>Name: %s <br>Email: %s <br>Message: %s", form.Name, form.Email, form.Message))
+	d := mail.NewDialer("smtp.gmail.com", 587, os.Getenv("EMAIL"), os.Getenv("APP_PASSWORD"))
+
+	if err := d.DialAndSend(m); err != nil {
+		panic(err)
+	}
+
+	http.Redirect(w, r, "/contact", http.StatusSeeOther)
+
 }
 
 func (app *application) accountView(w http.ResponseWriter, r *http.Request) {

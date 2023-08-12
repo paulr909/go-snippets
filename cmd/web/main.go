@@ -17,14 +17,6 @@ import (
 	"time"
 )
 
-//func init() {
-//	err := godotenv.Load(".env")
-//
-//	if err != nil {
-//		log.Fatal("Error loading .env file")
-//	}
-//}
-
 // Add a formDecoder field to hold a pointer to form.Decoder instance.
 type application struct {
 	debug          bool
