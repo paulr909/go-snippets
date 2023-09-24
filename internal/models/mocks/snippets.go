@@ -3,7 +3,7 @@ package mocks
 import (
 	"time"
 
-	"paulr909.github.com/internal/models"
+	"github.com/paulr909/internal/models"
 )
 
 var mockSnippet = &models.Snippet{

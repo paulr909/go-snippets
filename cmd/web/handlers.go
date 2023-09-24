@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"github.com/go-mail/mail"
 	"github.com/julienschmidt/httprouter"
+	"github.com/paulr909/internal/models"
+	"github.com/paulr909/internal/validator"
 	"net/http"
 	"os"
-	"paulr909.github.com/internal/models"
-	"paulr909.github.com/internal/validator"
 	"strconv"
 )
 

@@ -9,11 +9,11 @@ import (
 	"github.com/go-playground/form/v4"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
+	"github.com/paulr909/internal/models"
 	"html/template"
 	"log"
 	"net/http"
 	"os"
-	"paulr909.github.com/internal/models"
 	"time"
 )
 

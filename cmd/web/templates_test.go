@@ -1,7 +1,7 @@
 package main
 
 import (
-	"paulr909.github.com/internal/assert"
+	"github.com/paulr909/internal/assert"
 	"testing"
 	"time"
 )

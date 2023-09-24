@@ -1,4 +1,4 @@
-module paulr909.github.com
+module github.com/paulr909
 
 go 1.20
 

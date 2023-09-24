@@ -1,11 +1,11 @@
 package main
 
 import (
+	"github.com/paulr909/internal/models"
+	"github.com/paulr909/ui"
 	"html/template"
 	"io/fs"
 	"path/filepath"
-	"paulr909.github.com/internal/models"
-	"paulr909.github.com/ui"
 	"time"
 )
 

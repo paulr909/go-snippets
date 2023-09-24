@@ -1,8 +1,8 @@
 package main
 
 import (
+	"github.com/paulr909/ui"
 	"net/http"
-	"paulr909.github.com/ui"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/justinas/alice"

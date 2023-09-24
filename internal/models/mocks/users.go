@@ -1,7 +1,7 @@
 package mocks
 
 import (
-	"paulr909.github.com/internal/models"
+	"github.com/paulr909/internal/models"
 	"time"
 )
 

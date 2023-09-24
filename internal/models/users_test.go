@@ -3,7 +3,7 @@ package models
 import (
 	"testing"
 
-	"paulr909.github.com/internal/assert"
+	"github.com/paulr909/internal/assert"
 )
 
 func TestUserModelExists(t *testing.T) {
